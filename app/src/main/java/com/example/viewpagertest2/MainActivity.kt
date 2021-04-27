@@ -17,16 +17,21 @@ class MainActivity : AppCompatActivity() {
         myPagerAdapter = MyPagerAdapter()
         viewPagerMain.adapter = myPagerAdapter
         viewPagerMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                imageViewMain.setImageResource(Res.motoList[position])
+            }
+
             override fun onPageScrolled(
                     position: Int,
                     positionOffset: Float,
                     positionOffsetPixels: Int
             ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                Log.d("myLog", (positionOffset * 100).toInt().toString())
+//                Log.d("myLog", (positionOffset * 100).toInt().toString())
 //                Log.d("myLog", position.toString())
-                imageViewMain.setImageResource(Res.motoList[position])
-
+                motionMain.progress = positionOffset
             }
         })
     }
